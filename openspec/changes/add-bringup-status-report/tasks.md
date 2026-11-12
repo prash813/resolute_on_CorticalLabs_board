@@ -20,15 +20,15 @@
 
 ## 3. Report
 
-- [ ] 3.1 Write `docs/reports/resolute-kria-bringup-status.md`, opening with an outcome summary per board (firmware, kernel package version, boot result) and a one-paragraph image-build outcome (patched FIT, manifest versions). Verify the summary fits on one screen and distinguishes KV260's `7.0.0-1003-amd-embedded` (12 Nov patched image) from CL1's `7.0.0-1001-amd-embedded` (29 Oct classic FIT).
+- [x] 3.1 Write `docs/reports/resolute-kria-bringup-status.md`, opening with an outcome summary per board (firmware, kernel package version, boot result) and a one-paragraph image-build outcome (patched FIT, manifest versions). Verify the summary fits on one screen and distinguishes KV260's `7.0.0-1003-amd-embedded` (12 Nov patched image) from CL1's `7.0.0-1001-amd-embedded` (29 Oct classic FIT).
 
-- [ ] 3.2 Add sections for: the goal and obstacles; how the Resolute image is built (change `refine-image-build-spec`, the `.its`/zboot patch, build steps, PPAs, manifest); the KV260 approach and boot flow (`bootm` → `bootefi` on U-Boot xilinx-v2026.1) including the `fdtput` recovery path; the CL1 approach and boot flow (classic `bootm` on U-Boot 2024.01, raw Image FIT, RAUC slot, and `build-cl1-fit.sh` on `script-cl1-fit-image-build` at `83713fb`); a Mermaid diagram of the two boot flows; results and peripherals; other deliverables; risks and open items; next steps; acknowledgements. Verify each item from the `status-reporting` spec has a section and the Mermaid block renders on GitHub.
+- [x] 3.2 Add sections for: the goal and obstacles; how the Resolute image is built (change `refine-image-build-spec`, the `.its`/zboot patch, build steps, PPAs, manifest); the KV260 approach and boot flow (`bootm` → `bootefi` on U-Boot xilinx-v2026.1) including the `fdtput` recovery path; the CL1 approach and boot flow (classic `bootm` on U-Boot 2024.01, raw Image FIT, RAUC slot, and `build-cl1-fit.sh` on `script-cl1-fit-image-build` at `83713fb`); a Mermaid diagram of the two boot flows; results and peripherals; other deliverables; risks and open items; next steps; acknowledgements. Verify each item from the `status-reporting` spec has a section and the Mermaid block renders on GitHub.
 
-- [ ] 3.3 Link each result to its evidence file and each section to the matching baseline spec and, where relevant, to `refine-image-build-spec` or `script-cl1-fit-image-build`. Verify every relative link resolves (`grep -o '](\.[^)]*)'` and check each path exists).
+- [x] 3.3 Link each result to its evidence file and each section to the matching baseline spec and, where relevant, to `refine-image-build-spec` or `script-cl1-fit-image-build`. Verify every relative link resolves (`grep -o '](\.[^)]*)'` and check each path exists).
 
-- [ ] 3.4 List next steps as candidate OpenSpec changes with the support or decisions needed (for example `fix-flash-kernel-zboot-its`, `slim-server-image`, `re-enable-uefi-secure-boot`, and landing `script-cl1-fit-image-build` on main). Verify each has a one-line justification.
+- [x] 3.4 List next steps as candidate OpenSpec changes with the support or decisions needed (for example `fix-flash-kernel-zboot-its`, `slim-server-image`, `re-enable-uefi-secure-boot`, and landing `script-cl1-fit-image-build` on main). Verify each has a one-line justification.
 
-- [ ] 3.5 Add an Acknowledgements section crediting Sinan (Launchpad `sinan-k`, PPA `sinan-k/xlnx-flash-kernel`) for the patched flash-kernel, and the RP team for the Ubuntu Noble CL1 delivery and its device tree. Verify both are named with what they contributed.
+- [x] 3.5 Add an Acknowledgements section crediting Sinan (Launchpad `sinan-k`, PPA `sinan-k/xlnx-flash-kernel`) for the patched flash-kernel, and the RP team for the Ubuntu Noble CL1 delivery and its device tree. Verify both are named with what they contributed.
 
 ## 4. Review and export
 
