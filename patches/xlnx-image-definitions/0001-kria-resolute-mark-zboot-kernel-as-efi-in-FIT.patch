@@ -1,0 +1,96 @@
+From c69c3f68b81b526173e4a622761efbc9f2d0bff1 Mon Sep 17 00:00:00 2001
+From: prash813 <prash813@gmail.com>
+Date: Thu, 12 Nov 2026 16:44:02 +0530
+Subject: [PATCH] kria: resolute: mark the zboot kernel as EFI in the FIT
+
+The linux-amd-embedded 7.0 kernel is built with CONFIG_EFI_ZBOOT=y and
+zstd, so /boot/vmlinuz is an EFI zboot PE application (EFI stub plus a
+zstd-compressed arm64 Image), not a gzip stream. flash-kernel's
+image-kria.its still labels kernel-1 as os = "linux" and
+compression = "gzip", so on the KV260 (AMD EDF BSP 2026.1,
+U-Boot xilinx-v2026.1) bootm stops with "Bad gzipped data".
+
+Before running flash-kernel in the chroot, change only the kernel-1
+node of /usr/share/flash-kernel/its/image-kria.its to os = "efi" and
+compression = "none". bootm (CONFIG_BOOTM_EFI) then hands the PE kernel,
+the initrd and the selected FDT to the EFI loader. Load and entry
+addresses, the ramdisk and the DTB nodes are left alone.
+
+The step does nothing if the template already has os = "efi" and
+compression = "none", so it can stay once flash-kernel ships the fix.
+It fails the build if kernel-1 has neither the old nor the new values,
+rather than producing a FIT that does not boot.
+
+Images built before this change can be fixed after the build with
+fdtput on image.fit (/images/kernel-1 os efi, compression none).
+
+Signed-off-by: prash813 <prash813@gmail.com>
+---
+ classic/resolute/10-run-flash-kernel.sh | 47 +++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
+
+diff --git a/classic/resolute/10-run-flash-kernel.sh b/classic/resolute/10-run-flash-kernel.sh
+index 9e2c577..d70369a 100755
+--- a/classic/resolute/10-run-flash-kernel.sh
++++ b/classic/resolute/10-run-flash-kernel.sh
+@@ -6,10 +6,57 @@
+ export FK_MACHINE="ZynqMP *K26*"
+ export FK_FORCE=yes
+ 
++## The linux-amd-embedded kernel is an EFI zboot PE (EFI stub plus a
++## zstd-compressed Image), but image-kria.its labels kernel-1 as
++## os = "linux" / compression = "gzip", so U-Boot fails with
++## "Bad gzipped data". Relabel kernel-1 as os = "efi" / compression = "none"
++## so bootm hands it to the EFI loader. Only the kernel-1 node is touched;
++## this is a no-op once flash-kernel ships the fixed template.
++KRIA_ITS="${KRIA_ITS:-/usr/share/flash-kernel/its/image-kria.its}"
++
++kria_its_kernel_node() {
++    sed -n '/kernel-1[[:space:]]*{/,/};/p' "$KRIA_ITS"
++}
++
++kria_its_is_efi() {
++    kria_its_kernel_node | grep -q 'os[[:space:]]*=[[:space:]]*"efi";' &&
++        kria_its_kernel_node | grep -q 'compression[[:space:]]*=[[:space:]]*"none";'
++}
++
++kria_its_is_gzip_linux() {
++    kria_its_kernel_node | grep -q 'os[[:space:]]*=[[:space:]]*"linux";' &&
++        kria_its_kernel_node | grep -q 'compression[[:space:]]*=[[:space:]]*"gzip";'
++}
++
++fix_kria_its() {
++    if [ ! -f "$KRIA_ITS" ]; then
++        echo "ERROR: $KRIA_ITS not found" >&2
++        return 1
++    fi
++    if kria_its_is_efi; then
++        echo "$KRIA_ITS: kernel-1 already os=efi, compression=none"
++        return 0
++    fi
++    if ! kria_its_is_gzip_linux; then
++        echo "ERROR: $KRIA_ITS: unexpected kernel-1 node, not patching" >&2
++        return 1
++    fi
++    sed -i '/kernel-1[[:space:]]*{/,/};/ {
++        s/os[[:space:]]*=[[:space:]]*"linux";/os = "efi";/
++        s/compression[[:space:]]*=[[:space:]]*"gzip";/compression = "none";/
++    }' "$KRIA_ITS"
++    if ! kria_its_is_efi; then
++        echo "ERROR: $KRIA_ITS: failed to set kernel-1 os=efi, compression=none" >&2
++        return 1
++    fi
++    echo "$KRIA_ITS: kernel-1 set to os=efi, compression=none"
++}
++
+ mkdir -p /boot/firmware
+ 
+ ## Run flash-kernel in the chroot
+ if [ "$FK_MACHINE" != "none" ] && [ -f /usr/sbin/flash-kernel ]; then
++    fix_kria_its
+     /usr/sbin/flash-kernel
+ fi
+ 
+-- 
+2.43.0
+

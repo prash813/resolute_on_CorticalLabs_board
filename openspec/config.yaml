@@ -23,12 +23,14 @@ context: |
     - Images are cross-built for arm64 on an x86 host with ubuntu-image classic.
       flash-kernel comes from the PPA sinan-k/xlnx-flash-kernel; OEM packages come
       from the limerick-team private PPAs.
-    #- As an extra UEFI Secure Boot is temporarily disabled in the KV260 U-Boot (meta-mok
-    #  commit 2015820) because the distro kernel is not signed with the project keys.
     - Every change is delivered as a git patch/commit with an explanatory message
       and a Signed-off-by trailer; no manual in-place edits on build trees.
     - Commands that need sudo are run by the developer, not by an agent.
-
+  Reference material:
+    - Existing build work lives outside this repo in
+      /home/prashant.dhumal@canonical.com/development/canonical_projects/CorticalLabs/kria_images.
+      Read its README.md and KV260-ubuntu-26.04-build.md before writing
+      image-build specs or tasks.
 rules:
   proposal:
     - State which board(s) the change affects (KV260, CL1, or both) and which boot firmware version it assumes.
@@ -39,6 +41,8 @@ rules:
     - Mark tasks that need sudo or physical board access as "[manual]".
     - Include a verification task that boots the board and records the result.
 
+#- As an extra UEFI Secure Boot is temporarily disabled in the KV260 U-Boot (meta-mok
+#  commit 2015820) because the distro kernel is not signed with the project keys.
 # Per-operation guidance (optional)
 # Add advisory guidance for how apply and archive work should be conducted.
 # This is separate from artifact rules above.
