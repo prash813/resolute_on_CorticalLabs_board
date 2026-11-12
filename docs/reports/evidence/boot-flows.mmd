@@ -1,0 +1,17 @@
+flowchart LR
+  subgraph KV260["KV260 EVK — AMD EDF BSP 2026.1"]
+    direction TB
+    K1["U-Boot 2026.01"] --> K2["bootm on image.fit<br/>kernel os = efi, compression = none"]
+    K2 --> K3["bootm hands off to the EFI loader<br/>initrd via EFI_LOAD_FILE2"]
+    K3 --> K4["zboot PE decompresses itself<br/>linux-amd-embedded 7.0.0-1003"]
+    K4 --> K5["Ubuntu 26.04.1 login prompt<br/>serial log captured"]
+  end
+
+  subgraph CL1["CL1 — BSP 2023.2 firmware unchanged"]
+    direction TB
+    C1["U-Boot 2024.01, RAUC A/B"] --> C2["bootm on image.ub<br/>kernel os = linux, raw Image"]
+    C2 --> C3["Image extracted from the zboot PE<br/>unchanged Resolute initrd<br/>Noble CL1 device tree"]
+    C3 --> C4["linux-amd-embedded 7.0.0-1001<br/>running system captured;<br/>full U-Boot-to-login log outstanding"]
+  end
+
+  KV260 ~~~ CL1

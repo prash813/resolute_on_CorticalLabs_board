@@ -253,7 +253,7 @@ fully logged; the CL1 path is as designed and as assembled, with the
 running-system evidence above.
 
 ```mermaid
-flowchart TD
+flowchart LR
   subgraph KV260["KV260 EVK — AMD EDF BSP 2026.1"]
     direction TB
     K1["U-Boot 2026.01"] --> K2["bootm on image.fit<br/>kernel os = efi, compression = none"]
@@ -268,6 +268,8 @@ flowchart TD
     C2 --> C3["Image extracted from the zboot PE<br/>unchanged Resolute initrd<br/>Noble CL1 device tree"]
     C3 --> C4["linux-amd-embedded 7.0.0-1001<br/>running system captured;<br/>full U-Boot-to-login log outstanding"]
   end
+
+  KV260 ~~~ CL1
 ```
 
 ## Results

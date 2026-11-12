@@ -32,7 +32,7 @@
 
 ## 4. Review and export
 
-- [ ] 4.1 Export a PDF with `pandoc docs/reports/resolute-kria-bringup-status.md -o docs/reports/resolute-kria-bringup-status.pdf`; verify the PDF opens and the diagram is legible (render Mermaid to an image first if needed).
+- [x] 4.1 Export a PDF with `pandoc docs/reports/resolute-kria-bringup-status.md -o docs/reports/resolute-kria-bringup-status.pdf`; verify the PDF opens and the diagram is legible (render Mermaid to an image first if needed).
 
 - [ ] 4.2 [manual] Developer review for accuracy and tone, then commit with an explanatory message and Signed-off-by; verify `git log` shows the commit.
 

@@ -45,3 +45,12 @@ The host script that builds the CL1 FIT is on branch `script-cl1-fit-image-build
 
 - `openspec/changes/refine-image-build-spec/` on this branch (tip of `resolute-image-build` is `56f1e32`).
 - `patches/xlnx-image-definitions/0001-kria-resolute-mark-zboot-kernel-as-efi-in-FIT.patch`
+
+## Boot-flow diagram
+
+| File | What it is |
+|---|---|
+| `boot-flows.mmd` | Mermaid source used for the PDF figure (side-by-side KV260 and CL1 flows). The same chart is in the Markdown report. |
+| `boot-flows.png` | Raster rendering via `mmdc` (mermaid-cli) and system Chrome, for the PDF. |
+| `boot-flows.svg` | Vector rendering of the same chart. |
+
