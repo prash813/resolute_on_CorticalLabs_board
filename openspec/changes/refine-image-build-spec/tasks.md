@@ -52,7 +52,7 @@
       - the system reaches a login prompt
       - `/` is mounted from `LABEL=writable` and `/boot/firmware` from `LABEL=system-boot`
 - [x] 4.2 Record the result under `docs/evidence/image-build/`: the serial boot log, the `dumpimage -l` listing, `sfdisk -d` output, the manifest versions and the date and outcome (pass or fail). Verify: the files are committed with a `Signed-off-by` trailer.
-- [ ] 4.3 [manual] Recovery check: take an image built without the patch, apply the `fdtput` relabel from the spec to partition 1, and boot it on KV260. Verify: `fdtget` reports `efi`/`none`, the board reaches a login prompt, and the result is added to `docs/evidence/image-build/`.
+- [x] 4.3 [manual] Recovery check: take an image built without the patch, apply the `fdtput` relabel from the spec to partition 1, and boot it on KV260. Verify: `fdtget` reports `efi`/`none`, the board reaches a login prompt, and the result is added to `docs/evidence/image-build/`.
 
 ## Workflow follow-up
 
