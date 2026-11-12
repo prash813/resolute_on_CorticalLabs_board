@@ -1,23 +1,43 @@
 schema: spec-driven
 
-# Project context (optional)
-# Add only constraints that should guide OpenSpec artifacts and workflows.
-# Include constraints an agent cannot infer by reading the code.
-# Keep general project documentation and discoverable codebase facts out.
-# Example:
-#   context: |
-#     Designs and tasks must cover Windows, macOS, and Linux
-#     Write all artifacts in Spanish
+context: |
+  Goal: produce an early-access Ubuntu 26.04 (Resolute) arm64 server image for
+  AMD Kria SOM boards. There is no official Resolute server image for Kria; this
+  image is built from the PE team's work so far (Canonical OEM project "limerick").
+  Targets:
+    - KV260 EVK (K26 SOM): boots the image. Boot firmware is AMD EDF BSP 2026.1
+      (U-Boot xilinx-v2026.1). The only change needed during the image build was
+      to the FIT image source (.its) used by flash-kernel.
+    - Cortical Labs CL1 board (K26 SOM on a Cortical Labs custom carrier): boot
+      firmware is based on BSP 2023.2 (U-Boot 2024.01). It uses a RAUC A/B
+      partitioning scheme on eMMC, so replacing its U-Boot is not trivial and is
+      out of scope unless a change explicitly says otherwise.
+  Key constraints:
+    - The Resolute kernel (linux-amd-embedded) is an EFI zboot PE application
+      (EFI stub + zstd-compressed arm64 Image). Booting it from a FIT needs the
+      bootm -> bootefi flow, which is in upstream U-Boot v2025.07+ and in AMD EDF
+      BSP 2026.1+. Older firmware (e.g. CL1) cannot boot the PE from a FIT.
+    - Test the default Resolute distro kernel; do not recompile the kernel from
+      source. For old firmware, extract the raw arm64 Image from the zboot PE and
+      boot it with the classic FIT (os=linux) flow.
+    - Images are cross-built for arm64 on an x86 host with ubuntu-image classic.
+      flash-kernel comes from the PPA sinan-k/xlnx-flash-kernel; OEM packages come
+      from the limerick-team private PPAs.
+    - UEFI Secure Boot is temporarily disabled in the KV260 U-Boot (meta-mok
+      commit 2015820) because the distro kernel is not signed with the project keys.
+    - Every change is delivered as a git patch/commit with an explanatory message
+      and a Signed-off-by trailer; no manual in-place edits on build trees.
+    - Commands that need sudo are run by the developer, not by an agent.
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always state what is out of scope
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+rules:
+  proposal:
+    - State which board(s) the change affects (KV260, CL1, or both) and which boot firmware version it assumes.
+    - State what is out of scope.
+  design:
+    - When the boot flow is involved, name the U-Boot version and the bootm/bootefi path used.
+  tasks:
+    - Mark tasks that need sudo or physical board access as "[manual]".
+    - Include a verification task that boots the board and records the result.
 
 # Per-operation guidance (optional)
 # Add advisory guidance for how apply and archive work should be conducted.
