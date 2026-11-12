@@ -1,0 +1,6 @@
+flash-kernel 3.110ubuntu2.5
+linux-image-7.0.0-1003-amd-embedded 7.0.0-1003.3
+linux-image-amd-embedded 7.0.0.1003.3
+linux-modules-7.0.0-1003-amd-embedded 7.0.0-1003.3
+oem-limerick-kria-meta 0.22
+oem-limerick-meta 0.18~xlnx01

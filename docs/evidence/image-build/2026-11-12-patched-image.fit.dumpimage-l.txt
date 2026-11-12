@@ -1,0 +1,129 @@
+FIT description: Simple image with single Linux kernel, ramdisk and FDT blob
+Created:         Thu Nov 12 18:28:53 2026
+ Image 0 (kernel-1)
+  Description:  Ubuntu kernel
+  Created:      Thu Nov 12 18:28:53 2026
+  Type:         Kernel Image
+  Compression:  uncompressed
+  Data Size:    17572352 Bytes = 17160.50 KiB = 16.76 MiB
+  Architecture: AArch64
+  OS:           EFI Firmware
+  Load Address: 0x00200000
+  Entry Point:  0x00200000
+  Hash algo:    sha1
+  Hash value:   543e28113c53cecff1864c7c8499e74d1855dc25
+ Image 1 (ramdisk-1)
+  Description:  Ubuntu ramdisk
+  Created:      Thu Nov 12 18:28:53 2026
+  Type:         RAMDisk Image
+  Compression:  uncompressed
+  Data Size:    96722384 Bytes = 94455.45 KiB = 92.24 MiB
+  Architecture: AArch64
+  OS:           Linux
+  Load Address: unavailable
+  Entry Point:  unavailable
+  Hash algo:    sha1
+  Hash value:   37d7e368d49d57fdfe1e94fe0c0be15d8a166942
+ Image 2 (fdt-zynqmp-smk-k26-revA.dtb)
+  Description:  Flattened device tree blob - zynqmp-smk-k26-revA
+  Created:      Thu Nov 12 18:28:53 2026
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    40186 Bytes = 39.24 KiB = 0.04 MiB
+  Architecture: AArch64
+  Load Address: 0x44000000
+  Hash algo:    sha1
+  Hash value:   313e962d6a9593f99692c71d75b83eeb3ef15bf2
+ Image 3 (fdt-smk-k26-revA-sck-kr-g-revA.dtb)
+  Description:  Flattened device tree blob - smk-k26-revA-sck-kr-g-revA
+  Created:      Thu Nov 12 18:28:53 2026
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    45894 Bytes = 44.82 KiB = 0.04 MiB
+  Architecture: AArch64
+  Load Address: 0x44000000
+  Hash algo:    sha1
+  Hash value:   e2e9cbdc521aaa9db48d46757e02ad831db1a163
+ Image 4 (fdt-smk-k26-revA-sck-kv-g-revA.dtb)
+  Description:  Flattened device tree blob - smk-k26-revA-sck-kv-g-revA
+  Created:      Thu Nov 12 18:28:53 2026
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    45113 Bytes = 44.06 KiB = 0.04 MiB
+  Architecture: AArch64
+  Load Address: 0x44000000
+  Hash algo:    sha1
+  Hash value:   7a3481ecd4583031d8073c0d67fbd3e691456691
+ Image 5 (fdt-smk-k26-revA-sck-kr-g-revB.dtb)
+  Description:  Flattened device tree blob - smk-k26-revA-sck-kr-g-revB
+  Created:      Thu Nov 12 18:28:53 2026
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    45870 Bytes = 44.79 KiB = 0.04 MiB
+  Architecture: AArch64
+  Load Address: 0x44000000
+  Hash algo:    sha1
+  Hash value:   15d8a1b20319b852c277870c728cb899e74d846f
+ Image 6 (fdt-smk-k26-revA-sck-kv-g-revB.dtb)
+  Description:  Flattened device tree blob - smk-k26-revA-sck-kv-g-revB
+  Created:      Thu Nov 12 18:28:53 2026
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    45017 Bytes = 43.96 KiB = 0.04 MiB
+  Architecture: AArch64
+  Load Address: 0x44000000
+  Hash algo:    sha1
+  Hash value:   71e8be06da9804f4670952d94d69ca204d7f85a0
+ Image 7 (fdt-smk-k24-revA-sck-kd-g-revA.dtb)
+  Description:  Flattened device tree blob - smk-k24-revA-sck-kd-g-revA
+  Created:      Thu Nov 12 18:28:53 2026
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    44811 Bytes = 43.76 KiB = 0.04 MiB
+  Architecture: AArch64
+  Load Address: 0x44000000
+  Hash algo:    sha1
+  Hash value:   158022c7501711459d1ff47be39d0afc245345da
+ Default Configuration: 'conf-zynqmp-smk-k26-revA'
+ Configuration 0 (conf-zynqmp-smk-k26-revA)
+  Description:  Boot Ubuntu on kria SOM
+  Kernel:       kernel-1
+  Init Ramdisk: ramdisk-1
+  FDT:          fdt-zynqmp-smk-k26-revA.dtb
+  Hash algo:    sha1
+  Hash value:   unavailable
+ Configuration 1 (conf-zynqmp-smk-kd-g-revA)
+  Description:  Boot Ubuntu on Kria KD SOM
+  Kernel:       kernel-1
+  Init Ramdisk: ramdisk-1
+  FDT:          fdt-smk-k24-revA-sck-kd-g-revA.dtb
+  Hash algo:    sha1
+  Hash value:   unavailable
+ Configuration 2 (conf-smk-k26-revA-sck-kr-g-revA)
+  Description:  Boot Ubuntu on kria SOM
+  Kernel:       kernel-1
+  Init Ramdisk: ramdisk-1
+  FDT:          fdt-smk-k26-revA-sck-kr-g-revA.dtb
+  Hash algo:    sha1
+  Hash value:   unavailable
+ Configuration 3 (conf-smk-k26-revA-sck-kv-g-revA)
+  Description:  Boot Ubuntu on kria SOM
+  Kernel:       kernel-1
+  Init Ramdisk: ramdisk-1
+  FDT:          fdt-smk-k26-revA-sck-kv-g-revA.dtb
+  Hash algo:    sha1
+  Hash value:   unavailable
+ Configuration 4 (conf-smk-k26-revA-sck-kr-g-revB)
+  Description:  Boot Ubuntu on kria SOM
+  Kernel:       kernel-1
+  Init Ramdisk: ramdisk-1
+  FDT:          fdt-smk-k26-revA-sck-kr-g-revB.dtb
+  Hash algo:    sha1
+  Hash value:   unavailable
+ Configuration 5 (conf-smk-k26-revA-sck-kv-g-revB)
+  Description:  Boot Ubuntu on kria SOM
+  Kernel:       kernel-1
+  Init Ramdisk: ramdisk-1
+  FDT:          fdt-smk-k26-revA-sck-kv-g-revB.dtb
+  Hash algo:    sha1
+  Hash value:   unavailable

@@ -33,25 +33,25 @@
 
 ## 3. Rebuild and inspect the image
 
-- [ ] 3.1 [manual] Apply the patch to the `xlnx-image-definitions` `kria-resolute` checkout, then run `sudo ubuntu-image classic --debug -w work -O out classic/resolute/ubuntu-server-kria.yaml` from its root. Verify: `out/kria-server.img`, `out/kria-server-rootfs.tar.gz` and `out/kria-server.manifest` exist, and the manifest versions match the spec or are newer.
+- [x] 3.1 [manual] Apply the patch to the `xlnx-image-definitions` `kria-resolute` checkout, then run `sudo ubuntu-image classic --debug -w work -O out classic/resolute/ubuntu-server-kria.yaml` from its root. Verify: `out/kria-server.img`, `out/kria-server-rootfs.tar.gz` and `out/kria-server.manifest` exist, and the manifest versions match the spec or are newer.
 - [ ] 3.2 [manual] Run `sudo bash hooks/kria/classic/10-flash-kernel-fitimage out`. Verify: partition 1 holds `image.fit` and `boot.scr.uimg`, and `work/` is gone.
-- [ ] 3.3 [manual] Loop-mount partition 1 read-only and run `dumpimage -l` on `image.fit`. Verify:
+- [x] 3.3 [manual] Loop-mount partition 1 read-only and run `dumpimage -l` on `image.fit`. Verify:
       - `kernel-1` shows `Compression: uncompressed`, `OS: EFI Firmware` and load/entry `0x00200000`
       - `ramdisk-1` is unchanged
       - all 6 DTBs and 6 configurations are present
 
       Save the listing as evidence (task 4.2).
-- [ ] 3.4 Extract `kernel-1` with `dumpimage -T flat_dt -p 0 -o kernel image.fit`. Verify: `file kernel` reports `PE32+ executable (EFI application) Aarch64`.
+- [x] 3.4 Extract `kernel-1` with `dumpimage -T flat_dt -p 0 -o kernel image.fit`. Verify: `file kernel` reports `PE32+ executable (EFI application) Aarch64`.
 
 ## 4. Boot verification on KV260
 
-- [ ] 4.1 [manual] Write `out/kria-server.img` to a microSD card with `dd ... conv=fsync`. Boot a KV260 (`SCK-KV-G` rev B) running BSP 2026.1 `boot.bin` (U-Boot xilinx-v2026.1, Secure Boot disabled as in the `secure-boot` spec), and capture serial on `ttyPS1` at 115200. Verify:
+- [x] 4.1 [manual] Write `out/kria-server.img` to a microSD card with `dd ... conv=fsync`. Boot a KV260 (`SCK-KV-G` rev B) running BSP 2026.1 `boot.bin` (U-Boot xilinx-v2026.1, Secure Boot disabled as in the `secure-boot` spec), and capture serial on `ttyPS1` at 115200. Verify:
       - the log shows `Kria DT: #conf-smk-k26-revA-sck-kv-g-revB`
       - there is no `Bad gzipped data`
       - the kernel starts through the EFI loader
       - the system reaches a login prompt
       - `/` is mounted from `LABEL=writable` and `/boot/firmware` from `LABEL=system-boot`
-- [ ] 4.2 Record the result under `docs/evidence/image-build/`: the serial boot log, the `dumpimage -l` listing, `sfdisk -d` output, the manifest versions and the date and outcome (pass or fail). Verify: the files are committed with a `Signed-off-by` trailer.
+- [x] 4.2 Record the result under `docs/evidence/image-build/`: the serial boot log, the `dumpimage -l` listing, `sfdisk -d` output, the manifest versions and the date and outcome (pass or fail). Verify: the files are committed with a `Signed-off-by` trailer.
 - [ ] 4.3 [manual] Recovery check: take an image built without the patch, apply the `fdtput` relabel from the spec to partition 1, and boot it on KV260. Verify: `fdtget` reports `efi`/`none`, the board reaches a login prompt, and the result is added to `docs/evidence/image-build/`.
 
 ## Workflow follow-up

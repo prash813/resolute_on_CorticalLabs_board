@@ -1,0 +1,4 @@
+kernel-1 sha1 543e28113c53cecff1864c7c8499e74d1855dc25  PE32+ executable (EFI application) Aarch64 (stripped to external PDB), for MS Windows, 2 sections
+ramdisk-1 sha1 37d7e368d49d57fdfe1e94fe0c0be15d8a166942
+kernel-1 == /boot/vmlinuz-7.0.0-1003-amd-embedded: yes
+ramdisk-1 == /boot/initrd.img-7.0.0-1003-amd-embedded: yes
