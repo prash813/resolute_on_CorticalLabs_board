@@ -34,7 +34,7 @@
 ## 3. Rebuild and inspect the image
 
 - [x] 3.1 [manual] Apply the patch to the `xlnx-image-definitions` `kria-resolute` checkout, then run `sudo ubuntu-image classic --debug -w work -O out classic/resolute/ubuntu-server-kria.yaml` from its root. Verify: `out/kria-server.img`, `out/kria-server-rootfs.tar.gz` and `out/kria-server.manifest` exist, and the manifest versions match the spec or are newer.
-- [ ] 3.2 [manual] Run `sudo bash hooks/kria/classic/10-flash-kernel-fitimage out`. Verify: partition 1 holds `image.fit` and `boot.scr.uimg`, and `work/` is gone.
+- [x] 3.2 [manual] Run `sudo bash hooks/kria/classic/10-flash-kernel-fitimage out`. Verify: partition 1 holds `image.fit` and `boot.scr.uimg`, and `work/` is gone.
 - [x] 3.3 [manual] Loop-mount partition 1 read-only and run `dumpimage -l` on `image.fit`. Verify:
       - `kernel-1` shows `Compression: uncompressed`, `OS: EFI Firmware` and load/entry `0x00200000`
       - `ramdisk-1` is unchanged
