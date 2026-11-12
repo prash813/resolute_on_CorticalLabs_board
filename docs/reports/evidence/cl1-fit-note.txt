@@ -1,0 +1,75 @@
+# CL1 classic FIT listings
+
+## 29 Oct 2026 bring-up FIT (the one assembled by hand)
+
+Source (not in this repo; the binary is not committed):
+`/home/prashant.dhumal@canonical.com/development/canonical_projects/CorticalLabs/kria_images/xlnx-image-definitions/out/cortical_labs_dtb/image.ub`
+
+`dumpimage -l` output is in `cl1-image.ub.dumpimage-l.txt` in this folder.
+
+Kernel-1: OS Linux, uncompressed, load/entry 0x00200000, 72,941,568 bytes,
+sha1 93dd62437a5c3beb300af5d7d9d0fa75a08fb58f.
+Ramdisk-1 sha1 f45f21710e268206b2032f1f605290534ddab9fc.
+FDT sha1 4954f5ae74dfe42c0e3d27f37d27ed30f02fedef.
+Created: Thu Oct 29 17:15:28 2026.
+
+The FIT source used for that image is identical to
+`git show script-cl1-fit-image-build:fit/image-cortlab.its` (commit 83713fb),
+saved here as `image-cortlab.its`. The kernel node is os = "linux",
+compression = "none".
+
+## 12 Nov 2026 script reproduction
+
+Untracked work-tree file `scripts/image.ub` (not committed) is the output of
+`scripts/build-cl1-fit.sh` on branch `script-cl1-fit-image-build` (83713fb).
+`dumpimage -l` of that file:
+
+```
+FIT description: Simple image with single Linux kernel, ramdisk and FDT blob
+Created:         Thu Nov 12 13:44:36 2026
+ Image 0 (kernel-1)
+  Description:  Ubuntu kernel
+  Created:      Thu Nov 12 13:44:36 2026
+  Type:         Kernel Image
+  Compression:  uncompressed
+  Data Size:    72941568 Bytes = 71232.00 KiB = 69.56 MiB
+  Architecture: AArch64
+  OS:           Linux
+  Load Address: 0x00200000
+  Entry Point:  0x00200000
+  Hash algo:    sha1
+  Hash value:   93dd62437a5c3beb300af5d7d9d0fa75a08fb58f
+ Image 1 (ramdisk-1)
+  Description:  Ubuntu ramdisk
+  Created:      Thu Nov 12 13:44:36 2026
+  Type:         RAMDisk Image
+  Compression:  uncompressed
+  Data Size:    96631970 Bytes = 94367.16 KiB = 92.16 MiB
+  Architecture: AArch64
+  OS:           Linux
+  Load Address: unavailable
+  Entry Point:  unavailable
+  Hash algo:    sha1
+  Hash value:   f45f21710e268206b2032f1f605290534ddab9fc
+ Image 2 (system.dtb)
+  Description:  Flattened device tree blob - corticallab board
+  Created:      Thu Nov 12 13:44:36 2026
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    45977 Bytes = 44.90 KiB = 0.04 MiB
+  Architecture: AArch64
+  Load Address: 0x44000000
+  Hash algo:    sha1
+  Hash value:   4954f5ae74dfe42c0e3d27f37d27ed30f02fedef
+ Default Configuration: 'conf-corticallab-board'
+ Configuration 0 (conf-corticallab-board)
+  Description:  Boot Ubuntu on Cortical's board kria SOM+custom carrier
+  Kernel:       kernel-1
+  Init Ramdisk: ramdisk-1
+  FDT:          system.dtb
+  Hash algo:    sha1
+  Hash value:   unavailable
+```
+
+The two FITs differ only in the Created timestamp (29 Oct vs 12 Nov).
+Kernel, ramdisk and fdt sha1 values match.

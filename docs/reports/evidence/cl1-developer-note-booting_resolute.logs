@@ -1,0 +1,11 @@
+I tested EA 26.04  image on CorticalLabs board, The image seems to boot fine on that board.
+It is able to enumerate major periphs like eMMC, ethernet, NVME over PCIe, USB(USB-A, USB-C).
+Couple of critical points
+
+Image as produced by PE team's script do not boot as it follows bootefi flow which is not supported in Cortical Labs bootloader
+There are few changes that need to be done in image format to make it successfully boot with current boot firmware that board has.
+I think this should be  good enough to propose 0T to the customer
+
+unnecessry services like fancontrol.service,fwupd.service, very noisy apparmor
+is lima going to be default driver for MALI 400 MP2 GPU in Kria SOC
+

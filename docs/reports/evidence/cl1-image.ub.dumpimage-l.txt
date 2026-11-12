@@ -1,0 +1,44 @@
+FIT description: Simple image with single Linux kernel, ramdisk and FDT blob
+Created:         Thu Oct 29 17:15:28 2026
+ Image 0 (kernel-1)
+  Description:  Ubuntu kernel
+  Created:      Thu Oct 29 17:15:28 2026
+  Type:         Kernel Image
+  Compression:  uncompressed
+  Data Size:    72941568 Bytes = 71232.00 KiB = 69.56 MiB
+  Architecture: AArch64
+  OS:           Linux
+  Load Address: 0x00200000
+  Entry Point:  0x00200000
+  Hash algo:    sha1
+  Hash value:   93dd62437a5c3beb300af5d7d9d0fa75a08fb58f
+ Image 1 (ramdisk-1)
+  Description:  Ubuntu ramdisk
+  Created:      Thu Oct 29 17:15:28 2026
+  Type:         RAMDisk Image
+  Compression:  uncompressed
+  Data Size:    96631970 Bytes = 94367.16 KiB = 92.16 MiB
+  Architecture: AArch64
+  OS:           Linux
+  Load Address: unavailable
+  Entry Point:  unavailable
+  Hash algo:    sha1
+  Hash value:   f45f21710e268206b2032f1f605290534ddab9fc
+ Image 2 (system.dtb)
+  Description:  Flattened device tree blob - corticallab board
+  Created:      Thu Oct 29 17:15:28 2026
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    45977 Bytes = 44.90 KiB = 0.04 MiB
+  Architecture: AArch64
+  Load Address: 0x44000000
+  Hash algo:    sha1
+  Hash value:   4954f5ae74dfe42c0e3d27f37d27ed30f02fedef
+ Default Configuration: 'conf-corticallab-board'
+ Configuration 0 (conf-corticallab-board)
+  Description:  Boot Ubuntu on Cortical's board kria SOM+custom carrier
+  Kernel:       kernel-1
+  Init Ramdisk: ramdisk-1
+  FDT:          system.dtb
+  Hash algo:    sha1
+  Hash value:   unavailable

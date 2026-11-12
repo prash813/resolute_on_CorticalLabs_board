@@ -1,0 +1,70 @@
+# Secure Boot evidence (KV260, AMD EDF BSP 2026.1)
+
+Collected 12 Nov 2026 from sources already on disk. No board access or sudo
+was used. The EDF U-Boot `.config` was readable on the build host.
+
+## 1. U-Boot `.config` from the EDF 2026.1 build
+
+Path:
+`/opt/kria_edf_2026.1/build/tmp/work/k26_smk_kv_sdt-amd-linux/u-boot-xlnx/2026.01-xilinx-v2026.1+git/build/.config`
+
+(The same file, same size and mtime, is also at
+`kria_uefi_signing/edf-2026.1/build/tmp/work/k26_smk_kv_sdt-amd-linux/u-boot-xlnx/2026.01-xilinx-v2026.1+git/build/.config`.)
+
+```
+# CONFIG_EFI_SECURE_BOOT is not set
+CONFIG_EFI_VARIABLES_PRESEED=y
+CONFIG_BOOTM_EFI=y
+```
+
+`# CONFIG_EFI_SECURE_BOOT is not set` is at line 359 of that `.config`.
+
+## 2. meta-mok commit 2015820
+
+Repository: `/opt/kria_edf_2026.1/sources/meta-mok`
+
+```
+commit 2015820018179f814b6a26827dba4f41289022f9
+Author: prash813 <prash813@gmail.com>
+
+    u-boot-xlnx: temporarily disable UEFI Secure Boot
+
+    The Ubuntu 26.04 linux-amd-embedded 7.0 kernel is built with
+    CONFIG_EFI_ZBOOT=y, so vmlinuz is an unsigned EFI zboot PE. It is
+    booted via bootm with a FIT kernel node of os="efi", compression="none".
+
+    With Uboot compiled with CONFIG_EFI_SECURE_BOOT=y and the preseeded ubootefi.var.
+    However db in ubootefi.var only holds the Authenticode hash of the previous Noble kernel, so
+    efi_image_authenticate() rejects the new kernel ("Image not
+    authenticated").
+    Additionally with CONFIG_EFI_VARIABLES_PRESEED=y, PK/KEK/db/dbx
+    are write-protected at runtime, so Secure Boot cannot be turned off
+    from the U-Boot prompt.
+
+    Add a config fragment that turns off CONFIG_EFI_SECURE_BOOT for
+    bring-up. The preseed is kept. Side effect: SecureBoot=0, so the
+    kernel does not import MokListRT into .platform and MOK-signed
+    modules will not verify.
+
+    Revert once db carries the new kernel hash or the kernel is signed.
+```
+
+The recipe fragment named in
+`/home/prashant.dhumal@canonical.com/development/canonical_projects/CorticalLabs/kria_images/KV260-ubuntu-26.04-build.md`
+(section 5) is `recipes-bsp/u-boot/files/disable-efi-secure-boot.cfg`, containing:
+
+```
+# CONFIG_EFI_SECURE_BOOT is not set
+```
+
+## 3. What the KV260 serial log shows
+
+From `2026-11-12-kv260-patched-image-boot.log` line 41, at U-Boot banner time:
+
+```
+Secure Boot:    not authenticated, not encrypted
+```
+
+The same boot then reaches a login prompt (see that log and
+`2026-11-12-kv260-patched-image-result.md`). This confirms Secure Boot was
+not enforcing authentication on the firmware that booted the patched image.

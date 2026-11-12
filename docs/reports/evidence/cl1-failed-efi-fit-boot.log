@@ -1,0 +1,122 @@
+U-Boot 2024.01 (Oct 24 2024 - 10:42:51 +0000)
+
+CPU:   ZynqMP
+Silicon: v3
+Chip:  xck26
+Detected name: zynqmp-sm-k26-xcl2gc-rev1-cl1-revA
+Model: ZynqMP SM-K26 Rev1/B/A
+Board: Xilinx ZynqMP
+DRAM:  2 GiB (effective 4 GiB)
+PMUFW:  v1.1
+Xilinx I2C FRU format at nvmem0:
+ Manufacturer Name: XILINX
+ Product Name: SM-K26-XCL2GC
+ Serial No: XFL1B3RRWHQ3
+ Part Number: 5057-02  
+ File ID: 0x0
+ Revision Number: 1 
+Xilinx I2C FRU format at nvmem1:
+ Manufacturer Name: Cortical Labs
+ Product Name: CL1
+ Serial No: 2507-30
+ Part Number: CLP-2348-7006-07
+EL Level:       EL2
+Secure Boot:    not authenticated, not encrypted
+Core:  66 devices, 32 uclasses, devicetree: fit
+Warning: Device tree includes old 'u-boot,dm-' tags: please fix by 2023.07!
+WDT:   Started watchdog@fd4d0000 with servicing every 1000ms (60s timeout)
+cdns_wdt watchdog@ff150000: failed to get rate
+WDT:   Failed to start watchdog@ff150000
+NAND:  0 MiB
+MMC:   mmc@ff160000: 0
+Loading Environment from SPIFlash... SF: Detected mt25qu512a with page size 256 Bytes, erase size 64 KiB, total 64 MiB
+OK
+In:    No input devices available!
+Out:   No output devices available!
+Err:   No error devices available!
+Reset reason:   SOFT 
+board_late_init_xilinx: Saving run time variables FAILED
+Net:   
+ZYNQ GEM: ff0c0000, mdio bus ff0c0000, phyaddr 1, interface rgmii-id
+eth0: ethernet@ff0c0000
+starting USB...
+Bus usb@fe200000: generic_phy_get_bulk : no phys property
+Register 2000440 NbrPorts 2
+Starting the controller
+USB XHCI 1.00
+Bus usb@fe300000: generic_phy_get_bulk : no phys property
+Register 2000440 NbrPorts 2
+Starting the controller
+USB XHCI 1.00
+scanning bus usb@fe200000 for devices... 1 USB Device(s) found
+scanning bus usb@fe300000 for devices... 1 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+JTAG: Trying to boot script at 20000000
+## Executing script at 20000000
+Wrong image format for "source" command
+JTAG: script finished, continuing...
+Hit any key to stop autoboot:  0 
+Scanning for bootflows in all bootdevs
+Seq  Method       State   Uclass    Part  Name                      Filename
+---  -----------  ------  --------  ----  ------------------------  ----------------
+---  -----------  ------  --------  ----  ------------------------  ----------------
+(0 bootflows, 0 valid)
+Found valid slot A, 1 attempts remaining
+Saving Environment to SPIFlash... Erasing SPI flash...Writing to SPI flash...done
+Valid environment: 2
+OK
+Booting RAUC slot A in mmc 0:1...
+Booting from mmc 0:1 PARTUUID=1ea3ad54-597c-4cf9-9a84-6ba66a4af50a
+devpath=mmc 0:1
+prefix=/boot/
+bootargs=earlycon clk_ignore_unused rw rootwait uio_pdrv_genirq.of_id=generic-uio console=ttyPS0,115200 isolcpus=nohz,domain,managed_irq,2,3 nohz_full
+=2,3 rcu_nocbs=2,3 rcu_nocb_poll irqaffinity=0,1 root=/dev/mmcblk0p1 cma=256M root=PARTUUID=1ea3ad54-597c-4cf9-9a84-6ba66a4af50a systemd.hostname=CL1-
+2507-30 rauc.slot=A ignore_loglevel
+/boot/image.ub
+loading bitstream...
+7807932 bytes read in 550 ms (13.5 MiB/s)
+114198696 bytes read in 7777 ms (14 MiB/s)
+## Loading kernel from FIT Image at 12000000 ...
+   Using 'conf-corticallab-board' configuration
+   Trying 'kernel-1' kernel subimage
+     Description:  Ubuntu kernel
+     Created:      2026-10-29   9:53:50 UTC
+     Type:         Kernel Image
+     Compression:  uncompressed
+     Data Start:   0x120000ec
+     Data Size:    17519104 Bytes = 16.7 MiB
+     Architecture: AArch64
+     OS:           EFI Firmware
+     Load Address: 0x00200000
+     Entry Point:  0x00200000
+     Hash algo:    sha1
+     Hash value:   bf027085163b594938bf078f4ab5af675743abf7
+   Verifying Hash Integrity ... sha1+ OK
+Host not halted after 16000 microseconds.
+Host not halted after 16000 microseconds.
+   Loading Kernel Image
+"Synchronous Abort" handler, esr 0x8a000000, far 0x7fd9264f
+elr: 00000000080d864f lr : 000000000800614c (reloc)
+elr: 000000007fd9264f lr : 000000007fcc014c
+x0 : 0000000000000100 x1 : 0000000000000001
+x2 : 000000007bc870b8 x3 : 000000007fdc8088
+x4 : 000000007fda0d10 x5 : 000000007bc8b740
+x6 : 0000000000000000 x7 : 000000007bf00000
+x8 : 0000000000000010 x9 : 000000007bc8b730
+x10: 0000000000000000 x11: 0000000000000000
+x12: 000000007bce6a20 x13: 0000000000000000
+x14: 0000000000000200 x15: 000000007bc4e2d8
+x16: 001088c0001088c0 x17: 3717159c58d1a7c0
+x18: 000000007bc59d80 x19: 000000007fdc8088
+x20: 0000000000000f1f x21: 0000000000000001
+x22: 000000007bc870b8 x23: 0000000000000000
+x24: 000000007fda7538 x25: 0000000000000000
+x26: 0000000000000000 x27: 000000007fd9264f
+x28: 0000000000200000 x29: 000000007bc4e300
+
+Code: 00276563 72746166 6564006d 6574656c (66206120) 
+Resetting CPU ...
+
+### ERROR ### Please RESET the board ###
+
+
