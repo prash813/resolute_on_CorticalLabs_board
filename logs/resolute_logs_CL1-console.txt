@@ -1,0 +1,101 @@
+root@kria:~# dmesg | grep -rin mmc -
+39:[    0.000000] Kernel command line: earlycon clk_ignore_unused rw rootwait uio_pdrv_genirq.of_id=generic-uio console=ttyPS0,115200 isolcpus=nohz,do
+main,managed_irq,2,3 nohz_full=2,3 rcu_nocbs=2,3 rcu_nocb_poll irqaffinity=0,1 root=/dev/mmcblk0p1 cma=256M root=PARTUUID=1ea3ad54-597c-4cf9-9a84-6ba6
+6a4af50a systemd.hostname=CL1-2507-30 rauc.slot=A ignore_loglevel
+322:[   11.066416] mmc0: SDHCI controller on ff160000.mmc [ff160000.mmc] using ADMA 64-bit
+323:[   11.164163] mmc0: new HS200 MMC card at address 0001
+334:[   11.664499] mmcblk0: mmc0:0001 S0J56X 14.8 GiB
+335:[   11.686419]  mmcblk0: p1 p2 p3
+336:[   11.695441] mmcblk0boot0: mmc0:0001 S0J56X 31.5 MiB
+337:[   11.707864] mmcblk0boot1: mmc0:0001 S0J56X 31.5 MiB
+338:[   11.736486] mmcblk0rpmb: mmc0:0001 S0J56X 4.00 MiB, chardev (510:0)
+419:[   15.844083] EXT4-fs (mmcblk0p1): recovery complete
+420:[   15.854715] EXT4-fs (mmcblk0p1): mounted filesystem 4b03aae7-52a2-4ae2-8d87-09763739250b r/w with ordered data mode. Quota mode: none.
+500:[   22.080775] EXT4-fs (mmcblk0p1): re-mounted 4b03aae7-52a2-4ae2-8d87-09763739250b.
+579:[   47.767931] EXT4-fs (mmcblk0p1): resizing filesystem from 1373117 to 1835008 blocks
+580:[   48.061154] EXT4-fs (mmcblk0p1): resized filesystem to 1835008
+root@kria:~# dmesg | grep -rin nvme -
+324:[   11.257822] nvme nvme0: pci function 0000:01:00.0
+325:[   11.264352] nvme 0000:01:00.0: enabling device (0000 -> 0002)
+330:[   11.388915] nvme nvme0: allocated 64 MiB host memory buffer (2 segments).
+331:[   11.545368] nvme nvme0: 4/0/0 default/read/poll queues
+333:[   11.560433]  nvme0n1: p1
+662:[   89.451819] nvme nvme0: using unchecked data buffer
+663:[   90.241764] block nvme0n1: No UUID available providing old NGUID
+root@kria:~# dmesg | grep -rin usb -
+147:[    0.458820] usbcore: registered new interface driver usbfs
+148:[    0.464151] usbcore: registered new interface driver hub
+149:[    0.469430] usbcore: registered new device driver usb
+340:[   11.775995] xhci-hcd xhci-hcd.1.auto: new USB bus registered, assigned bus number 1
+344:[   11.805655] xhci-hcd xhci-hcd.1.auto: new USB bus registered, assigned bus number 2
+345:[   11.814442] xhci-hcd xhci-hcd.1.auto: Host supports USB 3.0 SuperSpeed
+346:[   11.828630] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.00
+347:[   11.837022] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+348:[   11.847416] usb usb1: Product: xHCI Host Controller
+349:[   11.855400] usb usb1: Manufacturer: Linux 7.0.0-1001-amd-embedded xhci-hcd
+350:[   11.883359] usb usb1: SerialNumber: xhci-hcd.1.auto
+351:[   11.897790] hub 1-0:1.0: USB hub found
+353:[   11.915943] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+354:[   11.925764] usb usb2: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.00
+355:[   11.934125] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+356:[   11.941740] usb usb2: Product: xHCI Host Controller
+357:[   11.946829] usb usb2: Manufacturer: Linux 7.0.0-1001-amd-embedded xhci-hcd
+358:[   11.953793] usb usb2: SerialNumber: xhci-hcd.1.auto
+359:[   11.960068] hub 2-0:1.0: USB hub found
+362:[   11.975673] xhci-hcd xhci-hcd.2.auto: new USB bus registered, assigned bus number 3
+366:[   12.005412] xhci-hcd xhci-hcd.2.auto: new USB bus registered, assigned bus number 4
+367:[   12.013137] xhci-hcd xhci-hcd.2.auto: Host supports USB 3.0 SuperSpeed
+368:[   12.020210] usb usb3: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.00
+369:[   12.028548] usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+370:[   12.035905] usb usb3: Product: xHCI Host Controller
+371:[   12.040843] usb usb3: Manufacturer: Linux 7.0.0-1001-amd-embedded xhci-hcd
+372:[   12.047770] usb usb3: SerialNumber: xhci-hcd.2.auto
+373:[   12.053897] hub 3-0:1.0: USB hub found
+375:[   12.062944] usb usb4: We don't know the algorithms for LPM for this host, disabling LPM.
+376:[   12.071787] usb usb4: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.00
+377:[   12.081225] usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+378:[   12.088555] usb usb4: Product: xHCI Host Controller
+379:[   12.093539] usb usb4: Manufacturer: Linux 7.0.0-1001-amd-embedded xhci-hcd
+380:[   12.100465] usb usb4: SerialNumber: xhci-hcd.2.auto
+381:[   12.110121] hub 4-0:1.0: USB hub found
+383:[   12.403461] usb 1-1: new high-speed USB device number 2 using xhci-hcd
+384:[   12.534940] usb 1-1: New USB device found, idVendor=0781, idProduct=55a9, bcdDevice= 1.00
+385:[   12.543203] usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+386:[   12.550382] usb 1-1: Product:  SanDisk 3.2Gen1
+387:[   12.554863] usb 1-1: Manufacturer:  USB
+388:[   12.558722] usb 1-1: SerialNumber: 0101f6c053a78a6aa5b5accd7fc929266d6e3314fe4d6a0286a720ebad3527a340e100000000000000000000d23c2367008d7000a955
+810753ae8281
+389:[   12.663336] usb-storage 1-1:1.0: USB Mass Storage device detected
+390:[   12.672423] scsi host0: usb-storage 1-1:1.0
+391:[   12.677533] usbcore: registered new interface driver usb-storage
+392:[   12.695919] usbcore: registered new interface driver uas
+393:[   13.725380] scsi 0:0:0:0: Direct-Access      USB      SanDisk 3.2Gen1 1.00 PQ: 0 ANSI: 6
+586:[   50.035353] audit: type=1400 audit(1785185075.181:70): apparmor="STATUS" operation="profile_load" profile="unconfined" name="lsusb" pid=670 com
+m="apparmor_parser"
+root@kria:~# dmesg | grep -rin gpu -
+520:[   22.747578] zynqmp_firmware firmware:zynqmp-firmware: sync_state() pending due to fd4b0000.gpu
+597:[   54.987737] lima fd4b0000.gpu: gp - mali400 version major 1 minor 1
+598:[   54.994123] lima fd4b0000.gpu: pp0 - mali400 version major 1 minor 1
+599:[   55.214455] lima fd4b0000.gpu: pp1 - mali400 version major 1 minor 1
+600:[   55.472427] lima fd4b0000.gpu: l2_cache0 64K, 4-way, 64byte cache line, 128bit external bus
+601:[   55.495183] lima fd4b0000.gpu: bus rate = 499999995
+602:[   55.506359] lima fd4b0000.gpu: mod rate = 499999995
+603:[   55.529363] [drm] Initialized lima 1.1.0 for fd4b0000.gpu on minor 0
+root@kria:~# 
+CTRL-A Z for help | 115200 8N1 | NOR | Minicom 2.7.1 | VT102 | Offline | ttyUSB0                                                                     
+
+ cat /etc/os-release 
+PRETTY_NAME="Ubuntu 26.04.1 LTS"
+NAME="Ubuntu"
+VERSION_ID="26.04"
+VERSION="26.04.1 LTS (Resolute Raccoon)"
+VERSION_CODENAME=resolute
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=resolute
+LOGO=ubuntu-logo
+
